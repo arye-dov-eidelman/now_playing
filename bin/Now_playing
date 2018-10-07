@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require './lib/Now_playing.rb'
+
+Nowplaying::CLI.new.call
