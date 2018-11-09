@@ -1,39 +1,24 @@
 class NowPlaying::Scraper
+	
+  def initialize 
+		@domain = "https://www.fandango.com"
+    @html = Nokogiri::HTML(open("https://www.fandango.com/moviesintheaters"))
+  end
 
-	def initialize 
-		@html = Nokogiri::HTML(open("https://www.fandango.com/moviesintheaters"))
-	end
-
-	def get_movies
-		items = @html.css(".movie-ls-group .visual-item")
-	end
+  def get_movies
+    cards = @html.css(".movie-ls-group .visual-item .visual-title")
+    cards.each do |card|
+      title = card.text.strip
+			url = card.attributes["href"].value.gsub(/http/, 'https')
+      NowPlaying::Movie.new(title, url)
+    end
+  end
 
 	def get_movie_details(movie)
-	end
-
-	def get_titles 
-		items = @html.css("movie-ls-group").css("visual-item")
-
-	# 	titles = @html.css(".visual-title").25.times do |title|
-	# 		url = title.attributes["href"].value 
-	# 		movie_page = Nokogiri::HTML(open(url))
-	# 		synopsis_url = movie_page.css("mop_synopsis-link").attributes["href"].value 
-	# 		synopsis_page = Nokogiri::HTML(open(synopsis_url))
-
-	# 		title = title.text.strip
-	# 		description = synopsis_page.css("description_class_name").text.strip 
-
-	# 		movie = Movie.new(title, description)
-	# 		movie.save 
-	# 	end
-		
-
-	# 	titles[0..24]
-	end
-
-	def get_description
-		movies = html.css("")
-		#"movie-synopsis_body"
-		#"mop_synopsis-link"
-	end
+		# binding.pry
+		movie_page = Nokogiri::HTML(open(movie.url))
+		synopsis_url = movie_page.css('.mop__synopsis-link')[0].attributes["href"].value
+		synopsis_page = Nokogiri::HTML(open(@domain + synopsis_url))
+		movie.synopsis = synopsis_page.css('.movie-synopsis__body')[0].text.strip
+  end
 end

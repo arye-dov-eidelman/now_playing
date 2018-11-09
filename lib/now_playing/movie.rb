@@ -1,14 +1,14 @@
-class NowPlaying::Movie 
-	attr_accessor :title, :description
-	@@all = []
+class NowPlaying::Movie
+  attr_accessor :title, :url, :synopsis
+  @@all = []
 
-	def initialize(title, description)
-		@title = title 
-		@description = description
-		@@all << self 
-	end
+  def initialize(title, url)
+    @title = title
+    @url = url
+    @@all << self
+  end
 
-	def self.all 
-		@@all
-	end 
-end 
+  def self.all
+    @@all
+  end
+end
