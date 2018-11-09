@@ -18,10 +18,10 @@ class NowPlaying::NowPlaying
 
  	def self.create
  		movies = NowPlaying::Movie.all
- 		m = movies.filter
- 		puts m.description 
+ 		m = movies # need to add .filter method with do block
+ 		# puts m.description  # Trying to add loop of movies description
  		
-  		scraper = Scraper.new 
+  		scraper = NowPlaying::Scraper.new 
   		
   		idx = 1
   		scraper.get_titles.each do |title|

@@ -10,23 +10,26 @@ class NowPlaying::Scraper
 	end
 
 	def get_titles 
-		binding.pry
-		titles = @html.css(".visual-title").map do |title|
-			url = title.attributes["href"].value 
-			movie_page = Nokogiri::HTML(open(url))
-			synopsis_url = movie_page.css("mop_synopsis-link").attributes["href"].value 
-			synopsis_page = Nokogiri::HTML(open(synopsis_url))
+		items = @html.css("movie-ls-group").css("visual-item")
+	
 
-			title = title.text.strip
-			description = synopsis_page.css("description_class_name").text.strip 
 
-			movie = Movie.new(title, description)
-			movie.save 
-		end
+	# 	titles = @html.css(".visual-title").25.times do |title|
+	# 		url = title.attributes["href"].value 
+	# 		movie_page = Nokogiri::HTML(open(url))
+	# 		synopsis_url = movie_page.css("mop_synopsis-link").attributes["href"].value 
+	# 		synopsis_page = Nokogiri::HTML(open(synopsis_url))
+
+	# 		title = title.text.strip
+	# 		description = synopsis_page.css("description_class_name").text.strip 
+
+	# 		movie = Movie.new(title, description)
+	# 		movie.save 
+	# 	end
 		
 
-		titles[0..24]
-	end 
+	# 	titles[0..24]
+	# end 
 
 	
 
