@@ -1,16 +1,12 @@
 class NowPlaying::Movie 
 	attr_accessor :title, :description
-
 	@@all = []
 
 	def initialize(title, description)
 		@title = title 
-		@description = description 
-	end 
-
-	def save 
+		@description = description
 		@@all << self 
-	end 
+	end
 
 	def self.all 
 		@@all

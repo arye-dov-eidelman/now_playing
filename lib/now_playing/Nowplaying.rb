@@ -1,7 +1,4 @@
-require 'pry'
-
 class NowPlaying::NowPlaying
-
 	attr_accessor :name, :url, :releasedate 
 
 	@@all = []
@@ -29,9 +26,4 @@ class NowPlaying::NowPlaying
   			idx = idx + 1
   		end
 	end
-
-
-
-
-
 end

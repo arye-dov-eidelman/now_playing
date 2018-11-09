@@ -1,18 +1,18 @@
-require 'nokogiri'
-require 'open-uri'
-require 'pry'
-
-
 class NowPlaying::Scraper
 
 	def initialize 
 		@html = Nokogiri::HTML(open("https://www.fandango.com/moviesintheaters"))
 	end
 
+	def get_movies
+		items = @html.css(".movie-ls-group .visual-item")
+	end
+
+	def get_movie_details(movie)
+	end
+
 	def get_titles 
 		items = @html.css("movie-ls-group").css("visual-item")
-	
-
 
 	# 	titles = @html.css(".visual-title").25.times do |title|
 	# 		url = title.attributes["href"].value 
@@ -29,22 +29,11 @@ class NowPlaying::Scraper
 		
 
 	# 	titles[0..24]
-	# end 
+	end
 
-	
-
-
- def get_description
- 	movies = html.css("")
- 	#"movie-synopsis_body"
- 	#"mop_synopsis-link"
-
-end
-
-
-
-
-
-
-
+	def get_description
+		movies = html.css("")
+		#"movie-synopsis_body"
+		#"mop_synopsis-link"
+	end
 end
